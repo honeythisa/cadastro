@@ -1,78 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
-  <component name="ChangeListManager">
-    <list default="true" id="1dacd56a-0bed-4db8-a6c1-18efe03bb276" name="Changes" comment="" />
-    <option name="SHOW_DIALOG" value="false" />
-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-    <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2NQzvg8oKSvjWW2k5JWzKhtZoXr" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/progamaçao"
-  }
-}]]></component>
-  <component name="RunManager" selected="Python.super">
-    <configuration name="calculator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="progamaçao" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/calculator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="progamaçao" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="super" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="progamaçao" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option
+#Variável opção irá controlar o while que regula o menu. Inicialmente ele deve possuir qualquer valor diferente de 5,
+#para que o menu seja executado pelo menos uma vez
+
+opção = 0
+#Variável que armazena a lista de clientes. Inicialmente acrescentamos 4 clientes na nossa lista:
+#Rodrigo, Ricardo, Ana e Letícia
+clientes = ["Rodrigo", "Ricardo", "Ana", "Letícia"]
+#Inicio do Menu. O while regula o menu. Enquanto o usuário não digitar a opção 5. O programa irá ficar em execução.
+while(opção!=5):
+    #Sequencia de 6 comandos print que irão imprimir o menu enquanto o usuario não digitar a opção 5.
+    print("Sistema do Supermercado")
+    print("1 - Cadastrar Cliente")
+    print("2 - Listar Clientes")
+    print("3- Alterar Cliente")
+    print("4 - Remover Cliente")
+    print("5 - Sair")
+    #Entrada de Dados. Neste ponto do programa o comando input irá ler através do teclado a opção que o usuário deseja executar.
+    opção = int(input("Digite a opção desejada: "))
+    #Estrutura Condicional que irá direcionar o programa para a opção escolhida do usuário.
+    if(opção==1):
+        #Opção realiza o cadastro do cliente
+        print("Você escolheu a opção 1 - Cadastrar Cliente")
+        #Leitura do nome do novo cliente via teclado através do comando input, o novo cliente ficará armazenado na variavel nome.
+        nome = input("Entre com o nome do novo cliente: ")
+        #O Comando append inclui um novo cliente(variável nome) na lista de clientes
+        clientes.append(nome)
+    elif(opção==2):
+        #Opção realiza a çlistagem dos clientes cadastrados no supermercado.
+        print("Você escolheu a opção 2 - Listar Clientes")
+        #O Comando for irá percorrer a lista de clientes e o comando print irá imprimir cada um dos clientes cadastrados.
+        for i in clientes:
+            #Impressão de cada um dos clientes.
+            print(i)
+    elif(opção==3):
+        #Opção que realiza a alteração do nome de um cliente já cadastrado.
+        print("Você escolheu a opção 3 - Alterar Cliente")
+        # Inicialmente o sistema imprime os clientes cadastrados para que o usuário possa escolher qual cliente irá remover.
+        print("Clientes:")
+        for i in clientes:
+            print(i)
+        #Pergunta ao usuário qual cliente ele deseja alterar.
+        nome = input("Digite o nome do cliente que você deseja alterar: ")
+        # Sabendo o cliente que queremos alterar iremos retirar o mesmo da lista de clientes.
+        clientes.remove(nome)
+        #Perguntar ao usuário o novo nome do cliente
+        nome = input("Digite o novo nome do cliente: ")
+        #Inserir o novo nome do cliente na lista de clientes.
+        clientes.append(nome)
+    elif(opção==4):
+        #Opção que realiza a remoção de um cliente cadastrado
+        print("Você escolheu a opção 4 - Remover Cliente")
+        #Inicialmente o sistema imprime os clientes cadastrados para que o usuário possa escolher qual cliente irá remover.
+        print("Clientes:")
+        for i in clientes:
+            print(i)
+        #Após a impressão dos clientes cadastrados o Sistema pergunta o nome do cliente que será removido e armazena
+        #o mesmo na variável nome
+        nome = input("Entre com o nome do cliente que você quer remover: ")
+        #O comando remove irá remover o nome da lista de clientes
+        clientes.remove(nome)
+    elif(opção==5):
+        #Impressão da Saída do Sistema - após o usuário "escolher" a opção 5
+        print("Você escolheu a opção 5 - Sair")
+    else:
+        #Impressão da mensagem de opção inválida. Caso o usuário digite um número fora do intervalo do menu(1 a 5).
+        print("Você escolheu uma opção inválida")
