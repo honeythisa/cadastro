@@ -3,8 +3,9 @@
 #as classes e outros elementos existentes nessa
 # biblioteca para construírmos nossa interface com o
 # usuário.
-import tkinter as tk
-from tkinter import ttk
+from tkinter import *
+from tkinter.ttk import Combobox
+
 
 #Criando uma classe - um novo tipo de dados. No nosso caso a Classe
 #tem o nome de Cliente e possuí quatro atributos(características)
@@ -68,81 +69,93 @@ for linha in arquivo.readlines():
 arquivo.close()
 
 # Criando a janela
-janela = tk.Tk()
+janela = Tk()
 # Configurando o título da janela
 janela.title("Cadastro de Cliente - Pet shop")
 # Configurando as dimensões da janela
 janela.geometry("900x600")
-# Adicionando um label na janela
-labelCliente = tk.Label(janela, text="Clientes: ")
-labelCliente.place(x=10,y=10)
+#adicionando imagem
+#janela.wm_attributes("-transparentcolor", "grey")
+#janela.overrideredirect(1)
+##def move_app(e):
+##    janela.geometry(f"+{e.x_tk}+{e.y_tk}")
+frame_photo = PhotoImage(file="bg 1.png")
+frame_label = Label(janela, border=0, bg="grey", image=frame_photo)
+frame_label.pack()
 #Adicionando um combo no cliente
+##vetorOpcoes = ["Masculino", "Feminino"]
+##comboCliente = tCombobox(janela,values=vetorOpcoes)
+##comboCliente.current()
+##comboCliente.place(x=110,y=10)
+#Adicionando as informações referentes ao nome do Cliente
+#label_fundo = Label(janela, )
+#label_fundo.place (x=150, y=170)
+# Adicionando um label na janela
+labelbg = Label(janela, width=75, height=60)
+labelbg.place(x=200,y=50)
+#Adicionando um combo no cliente
+labelCliente = Label(janela, text="Clientes: ")
+labelCliente.place(x=200,y=80)
 vetorOpcoes = []
 for i in  clientes:
     nome = i.nome
     vetorOpcoes.append(nome)
-comboCliente = ttk.Combobox(janela,values=vetorOpcoes)
+comboCliente = Combobox(janela,values=vetorOpcoes)
 comboCliente.current()
-comboCliente.place(x=110,y=10)
-#Adicionando um combo no cliente
-##vetorOpcoes = ["Masculino", "Feminino"]
-##comboCliente = ttk.Combobox(janela,values=vetorOpcoes)
-##comboCliente.current()
-##comboCliente.place(x=110,y=10)
-#Adicionando as informações referentes ao nome do Cliente
-labelNome = tk.Label(janela, text="Nome: ")
-labelNome.place(x=10,y=50)
-textoNome = tk.Text(janela,width=50, height=1)
-textoNome.place(x=110,y=50)
+comboCliente.place(x=230,y=80)
+labelNome = Label(janela, text="Nome: ")
+labelNome.place(x=230,y=110)
+textoNome = Text(janela,width=50, height=1)
+textoNome.place(x=280,y=110)
 #Adicionando as informações referentes ao CPF do Cliente
-labelCPF = tk.Label(janela, text="CPF:")
-labelCPF.place(x=10, y=80)
-textoCPF = tk.Text(janela,width=50, height=1)
-textoCPF.place(x=110, y=80)
+labelCPF = Label(janela, text="CPF:")
+labelCPF.place(x=230, y=140)
+textoCPF = Text(janela,width=50, height=1)
+textoCPF.place(x=280, y=140)
 #Adicionando as informações referentes ao endereço do Cliente
-labelEndereco = tk.Label(janela, text="Endereço:")
-labelEndereco.place(x=10,y=110)
-textoEndereco = tk.Text(janela,width=50,height=1)
-textoEndereco.place(x=110, y=110)
+labelEndereco = Label(janela, text="Endereço:")
+labelEndereco.place(x=230,y=170)
+textoEndereco = Text(janela,width=50,height=1)
+textoEndereco.place(x=280, y=170)
 #Adicionando as informações referentes ao telefone do Cliente
-labelTelefone = tk.Label(janela, text="Telefone:")
-labelTelefone.place(x=10,y=140)
-textoTelefone = tk.Text(janela,width=50,height=1)
-textoTelefone.place(x=110,y=140)
+labelTelefone = Label(janela, text="Telefone:")
+labelTelefone.place(x=230,y=200)
+textoTelefone = Text(janela,width=50,height=1)
+textoTelefone.place(x=280,y=200)
 #email
-labelEmail = tk.Label(janela, text="Email:")
-labelEmail.place(x=10,y=170)
-textoEmail = tk.Text(janela,width=50,height=1)
-textoEmail.place(x=110,y=170)
+labelEmail = Label(janela, text="Email:")
+labelEmail.place(x=230,y=230)
+textoEmail = Text(janela,width=50,height=1)
+textoEmail.place(x=280,y=230)
 #idade
-labelIdade = tk.Label(janela, text="Idade:")
-labelIdade.place(x=10,y=200)
-textoIdade = tk.Text(janela,width=50,height=1)
-textoIdade.place(x=110,y=200)
+labelIdade = Label(janela, text="Idade:")
+labelIdade.place(x=230,y=260)
+textoIdade = Text(janela,width=50,height=1)
+textoIdade.place(x=280,y=260)
 #titulo
-labelDadosPet = tk.Label(janela, text="DADOS DO PET", fg="white", bg="grey", font="Arial 15 bold italic")
-labelDadosPet.place(x=10, y=250)
+labelDadosPet = Label(janela, text="DADOS DO PET", fg="white", bg="grey", font="Arial 15 bold italic")
+labelDadosPet.place(x=230, y=310)
 #especiePet
-labelespeciePet = tk.Label(janela, text="Espécie do pet:")
-labelespeciePet.place(x=10,y=300)
-textoespeciePet = tk.Text(janela,width=50,height=1)
-textoespeciePet.place(x=110,y=300)
+labelespeciePet = Label(janela, text="Espécie do pet:")
+labelespeciePet.place(x=230,y=360)
+textoespeciePet = Text(janela,width=50,height=1)
+textoespeciePet.place(x=280,y=360)
 #nomePet
-labelnomePet = tk.Label(janela, text="Nome do pet:")
-labelnomePet.place(x=10,y=330)
-textonomePet = tk.Text(janela,width=50,height=1)
-textonomePet.place(x=110,y=330)
+labelnomePet = Label(janela, text="Nome do pet:")
+labelnomePet.place(x=230,y=390)
+textonomePet = Text(janela,width=50,height=1)
+textonomePet.place(x=280,y=390)
 #trabalho
-labelTrabalho = tk.Label(janela, text="Tipo de trabalho:")
-labelTrabalho.place(x=10,y=360)
-textoTrabalho = tk.Text(janela,width=50,height=1)
-textoTrabalho.place(x=110,y=360)
+labelTrabalho = Label(janela, text="Tipo de trabalho:")
+labelTrabalho.place(x=230,y=420)
+textoTrabalho = Text(janela,width=50,height=1)
+textoTrabalho.place(x=280,y=420)
 #Adicionando um botão a nossa tela
-botaoInserir = tk.Button(janela, text="Inserir")
-botaoInserir.place(x=50, y=400)
-botaoApagar = tk.Button(janela, text="Apagar")
-botaoApagar.place(x=150, y=400)
-botaoAlterar = tk.Button(janela, text="Alterar")
-botaoAlterar.place(x=250,y=400)
+botaoInserir = Button(janela, text="Inserir")
+botaoInserir.place(x=300, y=470)
+botaoApagar = Button(janela, text="Apagar")
+botaoApagar.place(x=400, y=470)
+botaoAlterar = Button(janela, text="Alterar")
+botaoAlterar.place(x=500,y=470)
 # Executando o loop principal da janela
 janela.mainloop()
