@@ -6,7 +6,103 @@
 from tkinter import *
 from tkinter.ttk import Combobox
 
+def formatar_cpf(event):
+    # Obtém o texto atual do Entry
+    cpf = textoCPF.get()
 
+    # Remove todos os caracteres não numéricos
+    cpf = ''.join(filter(str.isdigit, cpf))
+
+    # Aplica a máscara do CPF (###.###.###-##)
+    if len(cpf) >= 3:
+        cpf = f'{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}'
+    elif len(cpf) >= 6:
+        cpf = f'{cpf[:3]}.{cpf[3:6]}.{cpf[6:]}'
+    elif len(cpf) >= 9:
+        cpf = f'{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}'
+    elif len(cpf) > 0:
+        cpf = f'{cpf[:3]}.{cpf[3:]}'
+
+    # Atualiza o texto do Entry
+    textoCPF.delete(0, END)
+    textoCPF.insert(0, cpf)
+
+
+def gravarArquivo():
+    # Após a finalização do sistema pelo usuário. Ou seja após o usuário escolher
+    # a opção 5, devemos gravar as informações no arquivo novamente.
+    arquivo = open("C:/Users/melis/Documents/clientes.txt", "w")
+    # Percorre a lista de clientes
+    for i in clientes:
+        # Acrescenta o cliente ao arquivo final
+        arquivo.write(i.cpf + '\n')
+        arquivo.write(i.nome + '\n')
+        arquivo.write(i.endereco + '\n')
+        arquivo.write(i.telefone + '\n')
+        arquivo.write(i.email + '\n')
+        arquivo.write(i.idade + '\n')
+        arquivo.write(i.especiePet + '\n')
+        arquivo.write(i.nomePet + '\n')
+        arquivo.write(i.trabalho + '\n')
+    # Fecha o Arquivo
+    arquivo.close()
+    janela.destroy()
+
+def limparFormulario():
+    textoNome.delete("1.0", "end")
+    textoCPF.delete("1.0", "end")
+    textoTelefone.delete("1.0", "end")
+    textoEndereco.delete("1.0", "end")
+    textoIdade.delete("1.0", "end")
+    textoEmail.delete("1.0", "end")
+    textoespeciePet.delete("1.0", "end")
+    textonomePet.delete("1.0", "end")
+    textoTrabalho.delete("1.0", "end")
+
+def carregarClientes():
+    for i in clientes:
+        if(comboCliente.get()==i.nome):
+            limparFormulario()
+            textoNome.insert("1.0",i.nome)
+            textoCPF.insert("1.0",i.cpf)
+            textoTelefone.insert("1.0",i.telefone)
+            textoEndereco.insert("1.0",i.endereco)
+            textoIdade.insert("1.0", i.idade)
+            textoEmail.insert("1.0", i.email)
+            textoespeciePet.insert("1.0", i.especiePet)
+            textonomePet.insert("1.0", i.nomePet)
+            textoTrabalho.insert("1.0", i.trabalho)
+
+def inserirClientes():
+    novoCliente = Cliente(textoCPF.get("1.0","end-1c"),textoNome.get("1.0","end-1c"),textoEndereco.get("1.0","end-1c"),textoTelefone.get("1.0","end-1c"))
+    clientes.append(novoCliente)
+    # vetorOpcoes.append(novoCliente.nome)
+    my_insert()
+    limparFormulario()
+
+def my_insert(): # adding data to Combobox
+    #if e1.get() not in cb1['values']:
+    comboCliente['values'] +=(textoNome.get("1.0","end-1c")) # add option
+
+def remove_combo(): # removing option from the Combobox
+    my_new=[] # Blank list to hold new values
+    for opt in comboCliente['values']: # Loop through all options
+        if(opt != comboCliente.get()):
+            #print(opt)
+            my_new.append(opt) # Add to new list
+    comboCliente['values']=my_new # assign to new list
+    comboCliente.delete(0,'end') # remove from current selection text
+    comboCliente.current()
+
+def apagarClientes():
+    for cliente in clientes:
+        if (comboCliente.get()==cliente.nome):
+            clientes.remove(cliente)
+            remove_combo()
+
+
+def alterarClientes():
+    print("inserirClientes")
 #Criando uma classe - um novo tipo de dados. No nosso caso a Classe
 #tem o nome de Cliente e possuí quatro atributos(características)
 #cpf,nome,idade,telefone.
@@ -91,8 +187,8 @@ frame_label.pack()
 #label_fundo = Label(janela, )
 #label_fundo.place (x=150, y=170)
 # Adicionando um label na janela
-labelbg = Label(janela, width=75, height=60, bg="light yellow")
-labelbg.place(x=200,y=50)
+labelbg = Label(janela, width=65, height=32, bg="light yellow")
+labelbg.place(x=215,y=50)
 #Adicionando um combo no cliente
 labelCliente = Label(janela, text="Cliente: ", bg="light yellow")
 labelCliente.place(x=230,y=80)
@@ -103,6 +199,8 @@ for i in  clientes:
 comboCliente = Combobox(janela,values=vetorOpcoes)
 comboCliente.current()
 comboCliente.place(x=295,y=80)
+botaoCarregar = Button(janela, text="Carregar", bg="light cyan",command=lambda:carregarClientes())
+botaoCarregar.place(x=500, y=67)
 labelNome = Label(janela, text="Nome: ",bg="light yellow")
 labelNome.place(x=230,y=110)
 textoNome = Text(janela,width=45, height=1)
@@ -151,11 +249,13 @@ labelTrabalho.place(x=230,y=420)
 textoTrabalho = Text(janela,width=42,height=1)
 textoTrabalho.place(x=320,y=420)
 #Adicionando um botão a nossa tela
-botaoInserir = Button(janela, text="Inserir",bg="light green")
-botaoInserir.place(x=340, y=470)
-botaoApagar = Button(janela, text="Apagar",bg="light pink")
-botaoApagar.place(x=440, y=470)
-botaoAlterar = Button(janela, text="Alterar",bg="light blue")
-botaoAlterar.place(x=540,y=470)
+botaoInserir = Button(janela, text="Inserir", bg="light green",command=lambda:inserirClientes())
+botaoInserir.place(x=330, y=470)
+botaoApagar = Button(janela, text="Apagar", bg="light pink", command=lambda:apagarClientes())
+botaoApagar.place(x=390, y=470)
+botaoAlterar = Button(janela, text="Alterar", bg="light blue",command=lambda:alterarClientes(),)
+botaoAlterar.place(x=450,y=470)
+botaoSair = Button(janela, text="Sair", bg="light grey", command=lambda:gravarArquivo())
+botaoSair.place(x=510,y=470)
 # Executando o loop principal da janela
 janela.mainloop()
