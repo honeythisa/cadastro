@@ -40,10 +40,11 @@ cursor.execute("CREATE TABLE IF NOT EXISTS clientes (id INT AUTO_INCREMENT PRIMA
                "endereco VARCHAR(255), cpf VARCHAR(11), telefone VARCHAR(11), email VARCHAR(30), idade VARCHAR(4), "
                "especiePet VARCHAR(255), nomePet VARCHAR(255), trabalho VARCHAR(255))")
 
-cursor = db.cursor()
-cursor.execute("SELECT nome FROM clientes")
-clientes = cursor.fetchall()
-print("Clientes:", clientes)
+
+# cursor = db.cursor()
+# cursor.execute("SELECT nome FROM clientes")
+# clientes = cursor.fetchall()
+# print("Clientes:", clientes)
 
 
 def atualizarCombo():
@@ -205,6 +206,7 @@ def selecionar_cliente(event):
         entry_nomePet.insert(END, resultado[8])
         entry_trabalho.insert(END, resultado[9])
 
+
 def limparFormulario():
     entry_nome.delete(0, END)
     entry_endereco.delete(0, END)
@@ -277,15 +279,6 @@ labelTrabalho = Label(window, text="Trabalho:", bg="light yellow")
 labelTrabalho.place(x=230, y=420)
 entry_trabalho = Entry(window)
 entry_trabalho.place(x=320, y=420, width=340)
-# Adicionando um botão a nossa tela
-##botaoInserir = Button(window, text="Inserir", bg="light green",command=lambda:inserirClientes())
-##botaoInserir.place(x=330, y=470)
-##botaoApagar = Button(window, text="Apagar", bg="light pink", command=lambda:apagarClientes())
-##botaoApagar.place(x=390, y=470)
-##botaoAlterar = Button(window, text="Alterar", bg="light blue",command=lambda:alterarClientes(),)
-##botaoAlterar.place(x=450,y=470)
-##botaoSair = Button(window, text="Sair", bg="light grey", command=lambda:gravarArquivo())
-##botaoSair.place(x=510,y=470)
 
 # Criar o botão "Adicionar"
 button_adicionar = Button(window, text="Adicionar", bg="light green", command=adicionar_cliente)
@@ -304,7 +297,7 @@ label_cliente.place(x=230, y=80)
 combo_clientes = Combobox(window)
 combo_clientes.place(x=295, y=80)
 combo_clientes.bind("<<ComboboxSelected>>", selecionar_cliente)
-#Limpar formulario
+# Limpar formulario
 button_limpar = Button(window, text="Limpar formulário", bg="light cyan", command=limparFormulario)
 button_limpar.place(x=500, y=67)
 
