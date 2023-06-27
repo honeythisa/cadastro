@@ -1,4 +1,4 @@
-## Cadastre
+## Pet Shop Cadastre
 
 Using tkinter 
 
