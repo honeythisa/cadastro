@@ -7,7 +7,7 @@ from tkinter import messagebox
 def formatar_cpf(event):
     # Obtém o texto atual do Entry
 
-    cpf = cpf.get()
+    cpf = entry_cpf.get()
 
     # Remove todos os caracteres não numéricos
     cpf = ''.join(filter(str.isdigit, cpf))
@@ -23,8 +23,8 @@ def formatar_cpf(event):
         cpf = f'{cpf[:3]}.{cpf[3:]}'
 
     # Atualiza o texto do Entry
-    cpf.delete(0, END)
-    cpf.insert(0, cpf)
+    entry_cpf.delete(0, END)
+    entry_cpf.insert(0, cpf)
 
 
 # Conectar ao banco de dados
@@ -37,7 +37,7 @@ db = mysql.connector.connect(
 # Criar a tabela de clientes
 cursor = db.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS clientes (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255), "
-               "endereco VARCHAR(255), cpf VARCHAR(11), telefone VARCHAR(11), email VARCHAR(30), idade VARCHAR(4), "
+               "endereco VARCHAR(255), cpf VARCHAR(14), telefone VARCHAR(11), email VARCHAR(30), idade VARCHAR(4), "
                "especiePet VARCHAR(255), nomePet VARCHAR(255), trabalho VARCHAR(255))")
 
 
@@ -240,6 +240,7 @@ labelcpf = Label(window, text="CPF:", bg="light yellow")
 labelcpf.place(x=230, y=140)
 entry_cpf = Entry(window)
 entry_cpf.place(x=295, y=140, width=365)
+entry_cpf.bind('<KeyRelease>', formatar_cpf)
 # Adicionando as informações referentes ao
 # endereço do Cliente
 labelEndereco = Label(window, text="Endereço:", bg="light yellow")
